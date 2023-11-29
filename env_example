@@ -1,0 +1,7 @@
+SECRET_KEY= '32okrokwmerkwmer'
+DEBUG= True
+DB_NAME= shop_api_py
+DB_USER= adilet
+DB_PASSWORD= 1
+DB_HOST= localhost
+DB_PORT= 5432
