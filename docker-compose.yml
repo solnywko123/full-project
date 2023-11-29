@@ -1,12 +1,13 @@
-version: '3.9'
+version:  '3.3'
+
 
 services:
   web:
     build: .
-    command: >
+    command: > 
       sh -c "gunicorn config.wsgi:application --bind 0.0.0.0:8000"
     volumes:
-      - .:/user/src/app
+      - .:/usr/src/app
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
     ports:
@@ -14,12 +15,11 @@ services:
     depends_on:
       - db
 
-
   db:
     image: postgres
     restart: always
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_DB: $DB_NAME
       POSTGRES_USER: $DB_USER
@@ -30,18 +30,17 @@ services:
   migration:
     build: .
     command: >
-      sh -c "python manage.py makemigrations && python manage.py migrate"
-
+      sh -c "python manage.py makemigrations &&
+      python manage.py migrate"
     volumes:
       - .:/usr/src/app/
-
     depends_on:
       - db
 
-  redis:
+  redis :
     image: redis
     ports:
-      - "6378:6379"
+      - "6379:6379"
 
   celery:
     build: .

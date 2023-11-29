@@ -5,11 +5,11 @@ ENV TZ=Asia/Bishkek
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-WORKDIR /user/src/app
+WORKDIR /usr/src/app
 
 COPY requirements.txt ./
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 RUN mkdir static && mkdir media
 
@@ -19,7 +19,4 @@ RUN python3 manage.py collectstatic --noinput
 
 
 
-
-
-
-
+EXPOSE 8000
